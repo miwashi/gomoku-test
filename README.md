@@ -5,8 +5,8 @@ cd ws
 cd gomoku
 mkdir domain
 mkdir util
-mkdir \_\_test\_\_
-touch ./\_\_test\_\_/gomoku_test.js
+mkdir __test__
+touch ./__test__/gomoku_test.js
 touch ./util/error_messages.js
 touch ./util/test_util.js
 touch ./domain/gomoku.js
