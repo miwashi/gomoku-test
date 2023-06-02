@@ -9,7 +9,7 @@ const gameHandler = require('../domain/game.js'); // Objekt under test
  * Tests determined from state diagram.
  */
 describe('given a gameHandler', () => {
-  describe('when using ', () => {
+  describe('when creating ', () => {
     it('should have expected properties', () => {
       expect(gameHandler).toHaveProperty('play');
       expect(gameHandler).toHaveProperty('addPlayer');
@@ -22,7 +22,7 @@ describe('given a gameHandler', () => {
  * Tests determined from sequence diagram.
  */
 describe('given a gameHandler', () => {
-  describe('when using ', () => {
+  describe('when creating ', () => {
     it('should have expected properties', () => {
       expect(gameHandler).toHaveProperty('findGameById');
       expect(gameHandler).toHaveProperty('saveGame');
@@ -38,6 +38,7 @@ describe('given a gameHandler', () => {
   describe('when creating game', () => {
     it('should have expected properties', () => {
       const game = gameHandler.createGame();
+      console.log(game);
       expect(game).toHaveProperty('id');
       expect(game).toHaveProperty('name');
       expect(game).toHaveProperty('round');

@@ -27,6 +27,7 @@ exports.joinGame = (req, res) => {
 }
 
 exports.play = (req, res) => {
+    console.log(req.params)
     const id = req.params.game;
     const player = req.params.player;
     const col = req.params.col;

@@ -56,13 +56,13 @@ white.onerror = function() {
 };
 white.src = "/img/white.png";
 
+
 canvas.addEventListener('click', (event) => {
     const id = gameId.value;
     const player = player1.value;
     
-    const square = getCursorPosition(event);
+    const square = toRowAndCol(event);
     console.log("/api/game/player/play/" + id + "/" + id + "/" + square.col + "/" + square.row);
-
     fetch("/api/game/player/play/" + id + "/" + id + "/" + square.col + "/" + square.row)
         .then((response) => response.json())
         .then((game) => {
@@ -70,10 +70,9 @@ canvas.addEventListener('click', (event) => {
         })
         .catch(err => console.error('Request Failed', err));
         ;
-
 }, false);
 
-const getCursorPosition = (event) => {
+const toRowAndCol = (event) => {
     const rect = event.target.getBoundingClientRect()
 
     const height = Math.trunc(canvas.width / (parseInt(cols.value) + 1));
@@ -85,13 +84,22 @@ const getCursorPosition = (event) => {
     const row = Math.trunc((y +(height/2)) / height);
     const col = Math.trunc((x +(width/2)) / width);
 
+    /*
     ctx.drawImage(
         black,width * col - height/2,
         height * row - height/2,
         height,
         width
     );
+    */
     return {col :col, row : row};
+}
+
+const toPixels = (row, col) => {
+    const height = Math.trunc(canvas.width / (parseInt(cols.value) + 1));
+    const width = Math.trunc(canvas.height / (parseInt(rows.value) + 1));
+
+    return {x :x * row, y : y * col};
 }
 
 const updateGamesList = () => {
@@ -145,9 +153,25 @@ const updateGames = () => {
             }
             ctx.lineWidth = 0.25;
             ctx.stroke();
-            for(let col = 1; col <= game.board.squares.length; col++){
-                for(let row = 1; row <= game.board.squares.length; row++){
-
+            const height = Math.trunc(canvas.width / (parseInt(cols.value) + 1));
+            const width = Math.trunc(canvas.height / (parseInt(rows.value) + 1));
+            for(let row = 1; row < game.board.squares.length; row++){
+                for(let col = 1; col < game.board.squares[row].length; col++){
+                    if(game.board.squares[row][col]===1){
+                        ctx.drawImage(
+                            black, width * row - height / 2,
+                            height * col - height / 2,
+                            height,
+                            width
+                        );
+                    }else if(game.board.squares[row][col]===2){
+                        ctx.drawImage(
+                            white, width * row - height / 2,
+                            height * col - height / 2,
+                            height,
+                            width
+                        );
+                    }
                 }
             }
 

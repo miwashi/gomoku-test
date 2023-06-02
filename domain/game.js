@@ -19,7 +19,7 @@ const createGame = (name) => {
     const game = {
         id: uuid.v4(),
         name: name,
-        round: 0,
+        round: 1,
         player: 0,
         player1: null,
         player2: null,
@@ -58,13 +58,15 @@ const addPlayer = (id, playerName) => {
     return game;
 }
 
-const play = (id, playerName, col, row) => {
-    if(!id) return;
+const play = (id, playerId, col, row) => {
+    if(!id) throw ERR_MSGS.ERR_GAME_NOT_FOUND;
     const game = findGameById(id);
-    if(!playerName) return game;
+    if(!game) throw ERR_MSGS.ERR_GAME_NOT_FOUND;
+    if(!playerId) throw ERR_MSGS.ERR_PLAYER_NOT_FOUND;
+
     game.round++;
-    game.player = game.round % 2;
-    game.board.squares[col][row] = 1;
+    game.player = (game.round % 2) + 1;
+    game.board.squares[col][row] = game.player;
     return game;
 }
 
@@ -73,8 +75,10 @@ const findGamesByName = (name) => {
 }
 
 const findGameById = (id) => {
+    if(!id) throw ERR_MSGS.ERR_GAME_NOT_FOUND;
     const game = games.find( game => game.id === id );
-    if(!game) return game;
+    if(!game) throw ERR_MSGS.ERR_GAME_NOT_FOUND;
+
     return game;
 }
 
