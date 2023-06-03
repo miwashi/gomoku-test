@@ -22,7 +22,7 @@ const remove = () => {
 }
 
 const findById = (id) => {
-    if(!id) throw ERR_INVALID_PLAYER_ID;
+    if(!id) throw ERR_MSGS.ERR_INVALID_PLAYER_ID;
     const player = players.find((user) => user.id === id);
     return player;
 }

@@ -11,7 +11,7 @@ exports.findGameById = (req, res) => {
 
 exports.createGame = (req, res) => {
     res.json(gameHandler.findGameById(req.params.id));
-    const game = createGame();
+    const game = gameHandler.createGame();
     res.status(200).json(game);
 }
 
