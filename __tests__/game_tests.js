@@ -4,6 +4,7 @@
 
 const { faker } = require('@faker-js/faker'); // Vi använder faker för att skapa testdata.
 const gameHandler = require('../domain/game.js'); // Objekt under test
+const isUuid = require('uuid-validate');
 
 /**
  * Tests determined from state diagram.
@@ -38,7 +39,6 @@ describe('given a gameHandler', () => {
   describe('when creating game', () => {
     it('should have expected properties', () => {
       const game = gameHandler.createGame();
-      console.log(game);
       expect(game).toHaveProperty('id');
       expect(game).toHaveProperty('name');
       expect(game).toHaveProperty('round');
@@ -65,15 +65,16 @@ describe('given a gameHandler', () => {
  */
 describe('given a gameHandler', () => {
   describe('when creating game', () => {
-    it('should add one game', () => {
+    it('then should add one game', () => {
       const expectedNumberOfGames = gameHandler.getGames().length + 1;
       const game = gameHandler.createGame();
       expect(gameHandler.getGames().length).toBe(expectedNumberOfGames);
       expect(game.round).toBe(0);
+      expect(isUuid(game.id, 4)).toBe(true);
     });
   });
 
-  describe.skip('when creating a game with name', () => {
+  describe('when creating a game with name', () => {
     it('then should have correct name', () => {
       const expectedName = faker.name.lastName();
       const game = gameHandler.createGame(expectedName);
@@ -110,35 +111,51 @@ describe('given gameHandler', () => {
   });
 });
 
-
 /**
  * Test adding a player to a game.
  */
-describe.skip('given gameHandler and a game', () => {
+describe('given gameHandler and a game', () => {
   let game = gameHandler.createGame();
+
+  describe('when adding no players', () => {
+    it('then should have game with no players', () => {
+      expect(game.player1).toBe(null);
+      expect(game.player2).toBe(null);
+    });
+  });
+
   describe('when adding player with no name', () => {
-    expect(game.player1).toBe(null);
-    expect(game.player2).toBe(null);
     it('then should have correct attributes', () => {
       game = gameHandler.addPlayer(game.id);
       expect(game.player1).not.toBe(null);
       expect(game.player1).toHaveProperty("id");
       expect(game.player1).toHaveProperty("name");
-      console.log(game.player1);
+      expect(isUuid(game.player1.id, 4)).toBe(true);
+      expect(game.player1.name).not.toBe(null);
     });
   });
+
+  describe('when adding another player with no name', () => {
+    it('then should have correct attributes', () => {
+      game = gameHandler.addPlayer(game.id);
+      expect(game.player2).not.toBe(null);
+      expect(game.player2.name).not.toBe(null);
+      expect(game.player1.id).not.toBe(game.player2.id);
+    });
+  });
+
 });
 
 /**
  * Testing to play game.
  */
-describe.skip('given gameHandler with active game', () => {  
+describe.skip('given gameHandler with active game', () => {
   let game = gameHandler.createGame();
 
   describe('when adding player turn', () => {
     it('then should add stone to game', () => {
       game = gameHandler.play(game);
-      expect(game.round).toBe(1);
+      expect(game.round).toBe(0);
     });
   });
 });

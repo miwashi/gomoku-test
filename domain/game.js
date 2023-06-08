@@ -19,7 +19,7 @@ const createGame = (name) => {
     const game = {
         id: uuid.v4(),
         name: name,
-        round: 1,
+        round: 0,
         player: 0,
         player1: null,
         player2: null,
@@ -29,32 +29,29 @@ const createGame = (name) => {
     return game;
 }
 
-const saveGame = (game) => {
-    return game;
-}
-
 createGame("demo1");
 createGame("demo1");
 createGame("demo3");
 createGame("demo4");
 
+const saveGame = (game) => {
+    return game;
+}
 const getGames = () => {
     return games;
 }
 
 const addPlayer = (id, playerName) => {
-    if(!id)  {
-        throw ERR_MSGS.ERR_GAME_NOT_FOUND;
-    }
     const game = findGameById(id);
-    if(!(!game.player1 && !game.player2)) {
+    if(game.player2) {
         throw ERR_MSGS.ERR_GAME_FULL;
     }
-
-    if(!playerName) return game;
-
-    if(game.players.length > 1) return game;
-    game.players.push(playerName);
+    const player = playerHandler.create(playerName)
+    if(game.player1==null){
+        game.player1 = player;
+    }else{
+        game.player2 = player;
+    }
     return game;
 }
 
@@ -77,8 +74,10 @@ const findGamesByName = (name) => {
 const findGameById = (id) => {
     if(!id) throw ERR_MSGS.ERR_GAME_NOT_FOUND;
     const game = games.find( game => game.id === id );
-    if(!game) throw ERR_MSGS.ERR_GAME_NOT_FOUND;
-
+    if(!game) {
+        console.log("No game found!");
+        throw ERR_MSGS.ERR_GAME_NOT_FOUND;
+    }
     return game;
 }
 

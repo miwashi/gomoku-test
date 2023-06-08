@@ -84,14 +84,21 @@ const toRowAndCol = (event) => {
     const row = Math.trunc((y +(height/2)) / height);
     const col = Math.trunc((x +(width/2)) / width);
 
-    /*
-    ctx.drawImage(
-        black,width * col - height/2,
-        height * row - height/2,
-        height,
-        width
-    );
-    */
+    console.log("DRAWING")
+    if(round.value % 2 == 0){
+        ctx.drawImage(
+            white,width * col - height/2,
+            height * row - height/2,
+            height,
+            width);
+    }else{
+        ctx.drawImage(
+            black,width * col - height/2,
+            height * row - height/2,
+            height,
+            width);
+    }
+    console.log("DRAWN")
     return {col :col, row : row};
 }
 
@@ -183,6 +190,19 @@ const updateGames = () => {
             console.error('Request Failed', err)
             running = false;
         });
+}
+
+const drawStone = (round, height, width, row, col) => {
+    let image = black;
+    if(round % 2 == 0) {
+        image = white;
+    }
+    ctx.drawImage(
+        image, width * row - height / 2,
+        height * col - height / 2,
+        height,
+        width
+    );
 }
 
 const setGameId = (id) => {
