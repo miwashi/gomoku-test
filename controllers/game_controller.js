@@ -1,5 +1,6 @@
 const gameHandler = require('../domain/game.js');
 const playerHandler = require('../domain/player.js');
+const { logger } = require('../config');
 
 exports.getGames = (req, res) => {
     res.status(200).json(gameHandler.getGames());
@@ -12,7 +13,7 @@ exports.findGameById = (req, res) => {
 exports.createGame = (req, res) => {
     res.json(gameHandler.findGameById(req.params.id));
     const game = gameHandler.createGame();
-    res.status(200).json(game);
+    res.status(200).json(JSON.stringify(game));
 }
 
 exports.joinGame = (req, res) => {
@@ -22,12 +23,12 @@ exports.joinGame = (req, res) => {
     }else if(game.player2 == "missing"){
         game.player2 = req.params.player;
     }
-    console.log(game);
+    logger.info(game);
     res.status(200).json(games);
 }
 
 exports.play = (req, res) => {
-    console.log(req.params)
+    logger.info(JSON.stringify(req.params))
     const id = req.params.game;
     const player = req.params.player;
     const col = req.params.col;

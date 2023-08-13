@@ -1,5 +1,5 @@
 //https://en.wikipedia.org/wiki/Go_(game)
-
+const { environments, ENV, logger } = require('../config');
 const uuid = require('uuid');
 const gomokuHandler = require('./gomoku.js');
 const playerHandler = require('./player.js');
@@ -29,10 +29,12 @@ const createGame = (name) => {
     return game;
 }
 
-createGame("demo1");
-createGame("demo1");
-createGame("demo3");
-createGame("demo4");
+if(ENV === environments.DEV || ENV === environments.TEST){
+    createGame("demo1");
+    createGame("demo1");
+    createGame("demo3");
+    createGame("demo4");
+}
 
 const saveGame = (game) => {
     return game;
