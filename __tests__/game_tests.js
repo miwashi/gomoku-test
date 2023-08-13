@@ -6,6 +6,11 @@ const { faker } = require('@faker-js/faker'); // Vi använder faker för att ska
 const gameHandler = require('../domain/game.js'); // Objekt under test
 const isUuid = require('uuid-validate');
 
+const ID_EMPTY_GAME = "015cdc04-4d22-46f7-8d8e-f1879bb9bf1b";
+const ID_FULL_GAME = "88aaf28d-7fef-4028-9e94-7fdbbbd662a0";
+const ID_BLACK_GAME = "ebdf150a-4740-42ea-a5a7-dfce2f6f3725";
+const ID_WHITE_GAME = "6d3e9d43-9d19-4fb5-a684-b8514f0e4810";
+
 /**
  * Tests determined from state diagram.
  */

@@ -1,5 +1,7 @@
 //https://en.wikipedia.org/wiki/Go_(game)
 const { environments, ENV, logger } = require('../config');
+const { emptyGame, fullGame, whiteGame, blackGame } = require('../test_data/loader');
+
 const uuid = require('uuid');
 const gomokuHandler = require('./gomoku.js');
 const playerHandler = require('./player.js');
@@ -30,10 +32,12 @@ const createGame = (name) => {
 }
 
 if(ENV === environments.DEV || ENV === environments.TEST){
-    createGame("demo1");
-    createGame("demo1");
-    createGame("demo3");
-    createGame("demo4");
+    games.push(emptyGame);
+    games.push(fullGame);
+    games.push(whiteGame);
+    games.push(blackGame);
+    createGame("ramdom game 1");
+    createGame("ramdom game 2");
 }
 
 const saveGame = (game) => {
