@@ -137,7 +137,7 @@ describe.skip('given a gomokuHandler', () => {
       it('game should throw exception', () => {
         expect(() => {
           gomokuHandler.play(board, square.col, square.row, player);
-        }).toThrow(ERR_MSGS.ERR_SQUARE_OCCUPIED)
+        }).toThrow(ERR_MSGS.ERR_TILE_OCCUPIED)
       });
     });
   });
@@ -162,8 +162,8 @@ describe.skip('given a gomokuHandler', () => {
 
     describe('when having random diagonal five in row', () => {
       let board = gomokuHandler.createBoard();
-      for(let square of testUtil.randomDiagonal(board)){
-        board = gomokuHandler.play(board, square.col, square.row, player);
+      for(let tile of testUtil.randomDiagonal(board)){
+        board = gomokuHandler.play(board, tile.col, tile.row, player);
       }
       it('isWin should return true', () => {
         expect(gomokuHandler.isWin(board)).toBe(true);
@@ -172,8 +172,8 @@ describe.skip('given a gomokuHandler', () => {
 
     describe('when having random vertical five in row', () => {
       let board = gomokuHandler.createBoard();
-      for(let square of testUtil.randomVertical(board)){
-        board = gomokuHandler.play(board, square.col, square.row, player);
+      for(let tile of testUtil.randomVertical(board)){
+        board = gomokuHandler.play(board, tile.col, tile.row, player);
       }
       it('isWin should return true', () => {
         expect(gomokuHandler.isWin(board)).toBe(true);
@@ -183,8 +183,8 @@ describe.skip('given a gomokuHandler', () => {
     describe('when having random horizontal five in row', () => {
       let player = 1;
       let board = gomokuHandler.createBoard();
-      for(let square of testUtil.randomHorisontal(board)){
-        board = gomokuHandler.play(board, square.col, square.row, player);
+      for(let tile of testUtil.randomHorisontal(board)){
+        board = gomokuHandler.play(board, tile.col, tile.row, player);
       }
       it('isWin should return true', () => {
         expect(gomokuHandler.isWin(board)).toBe(true);

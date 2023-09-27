@@ -53,12 +53,12 @@ describe('given a gameHandler', () => {
       expect(game.board).toHaveProperty('minInRow');
       expect(game.board).toHaveProperty('cols');
       expect(game.board).toHaveProperty('rows');
-      expect(game.board).toHaveProperty('squares');
-      expect(Array.isArray(game.board.squares)).toBe(true);
-      for( const row of game.board.squares){
+      expect(game.board).toHaveProperty('tiles');
+      expect(Array.isArray(game.board.tiles)).toBe(true);
+      for( const row of game.board.tiles){
         expect(Array.isArray(row)).toBe(true);
-        for( const square of row){
-          expect(square).toBe(0);
+        for( const tile of row){
+          expect(tile).toBe(0);
         }
       }
     });

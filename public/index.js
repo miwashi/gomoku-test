@@ -34,7 +34,7 @@ if (user) {
     userName.value = user.name;
 } else {
     console.log('User not found in local storage');
-    fetch("/api/game/player/create")
+    fetch("/api/gomoku/player/create")
         .then((response) => response.json())
         .then((aUser) => {
             console.log(aUser);
@@ -61,9 +61,9 @@ canvas.addEventListener('click', (event) => {
     const id = gameId.value;
     const player = player1.value;
     
-    const square = toRowAndCol(event);
-    console.log("/api/game/player/play/" + id + "/" + id + "/" + square.col + "/" + square.row);
-    fetch("/api/game/player/play/" + id + "/" + id + "/" + square.col + "/" + square.row)
+    const tile = toRowAndCol(event);
+    console.log("/api/gomoku/player/play/" + id + "/" + id + "/" + tile.col + "/" + tile.row);
+    fetch("/api/gomoku/player/play/" + id + "/" + id + "/" + tile.col + "/" + tile.row)
         .then((response) => response.json())
         .then((game) => {
             console.log(game.name + ", round = " + game.round);
@@ -110,7 +110,7 @@ const toPixels = (row, col) => {
 }
 
 const updateGamesList = () => {
-    fetch("/api/game/games")
+    fetch("/api/gomoku/games")
         .then((response) => response.json())
         .then((games) => {
             gameList.innerHTML = '';
@@ -130,7 +130,7 @@ const updateGamesList = () => {
 }
 
 const updateGames = () => {
-    fetch("/api/game/games/" + gameId.value)
+    fetch("/api/gomoku/games/" + gameId.value)
         .then((response) => response.json())
         .then((game) => {
             gameName.value = game.name;
@@ -162,16 +162,16 @@ const updateGames = () => {
             ctx.stroke();
             const height = Math.trunc(canvas.width / (parseInt(cols.value) + 1));
             const width = Math.trunc(canvas.height / (parseInt(rows.value) + 1));
-            for(let row = 1; row < game.board.squares.length; row++){
-                for(let col = 1; col < game.board.squares[row].length; col++){
-                    if(game.board.squares[row][col]===1){
+            for(let row = 1; row < game.board.tiles.length; row++){
+                for(let col = 1; col < game.board.tiles[row].length; col++){
+                    if(game.board.tiles[row][col]===1){
                         ctx.drawImage(
                             black, width * row - height / 2,
                             height * col - height / 2,
                             height,
                             width
                         );
-                    }else if(game.board.squares[row][col]===2){
+                    }else if(game.board.tiles[row][col]===2){
                         ctx.drawImage(
                             white, width * row - height / 2,
                             height * col - height / 2,

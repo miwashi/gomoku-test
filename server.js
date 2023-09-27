@@ -1,3 +1,4 @@
+const { ENV, environments } = require('./config');
 const express = require('express');
 const cors = require('cors')
 var favicon = require('serve-favicon');
@@ -13,6 +14,7 @@ app.use(express.static('public'));
 
 const swaggerOptions = {
     swaggerDefinition: {
+        openapi: "3.0.0",  // Indicating this is an OpenAPI 3 specification
         info: {
             version: "1.0.0",
             title: "Gomoku API",
@@ -20,15 +22,26 @@ const swaggerOptions = {
             contact: {
                 name: "Wacoco"
             },
-            servers: ["http://localhost:3000"]
-        }
+        },
+        servers: [
+            {
+                url: "http://localhost:3001/api/gomoku"
+            }
+        ]
     },
     apis: ['./routes/*.js']
 };
 
+
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.use('/api/game', require('./routes/game_routes.js'));
+app.use('/api/gomoku', require('./routes/game_routes.js'));
+
+if (ENV !== environments.PROD) {
+    app.use('*', (req, res) => {
+        res.redirect('/api-docs');
+    });
+}
 
 module.exports = app;

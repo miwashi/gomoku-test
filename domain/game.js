@@ -69,7 +69,7 @@ const play = (id, playerId, col, row) => {
 
     game.round++;
     game.player = (game.round % 2) + 1;
-    game.board.squares[col][row] = game.player;
+    game.board.tiles[col][row] = game.player;
     return game;
 }
 

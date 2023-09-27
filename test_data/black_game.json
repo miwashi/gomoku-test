@@ -3,14 +3,20 @@
     "name": "black game",
     "round": 256,
     "player": 1,
-    "player1": null,
-    "player2": null,
-    "state": "black",
+    "player1": {
+        "id": "",
+        "name": ""
+    },
+    "player2": {
+        "id": "",
+        "name": ""
+    },
+    "state":"black",
     "board": {
         "minInRow": 5,
         "cols": 16,
         "rows": 16,
-        "squares": [
+        "tiles": [
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
