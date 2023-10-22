@@ -52,10 +52,10 @@ const createBoard = () => {
 
 const play = (board, col, row, player) => {
     if(col <= 0 || row <= 0){
-        throw(ERR_MSGS.ERR_SQUARE_OUT_OF_BOUNDS);
+        throw(ERR_MSGS.ERR_TILE_OUT_OF_BOUNDS);
     }
     if(col > COLS || row > ROWS){
-        throw(ERR_MSGS.ERR_SQUARE_OUT_OF_BOUNDS);
+        throw(ERR_MSGS.ERR_TILE_OUT_OF_BOUNDS);
     }
 
     if(board.tiles[col][row] == 0){

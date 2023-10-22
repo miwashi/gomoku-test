@@ -31,12 +31,12 @@ describe.skip('given a gomokuHandler', () => {
         expect(board).toHaveProperty('minInRow');
         expect(board).toHaveProperty('cols');
         expect(board).toHaveProperty('rows');
-        expect(board).toHaveProperty('squares');
-        expect(Array.isArray(board.squares)).toBe(true);
-        for( const row of board.squares){
+        expect(board).toHaveProperty('tiles');
+        expect(Array.isArray(board.tiles)).toBe(true);
+        for( const row of board.tiles){
           expect(Array.isArray(row)).toBe(true);
-          for( const square of row){
-            expect(square).toBe(0);
+          for( const tile of row){
+            expect(tile).toBe(0);
           }
         }
       });
@@ -44,41 +44,41 @@ describe.skip('given a gomokuHandler', () => {
   });
 
   /**
-   * Test if a square gets occupied with play.
+   * Test if a tile gets occupied with play.
    */
-  describe.skip('given a board, and square', () => {
+  describe.skip('given a board, and tile', () => {
     const player = 1;
     const row = 1; 
     const col = 1;
     let board = gomokuHandler.createBoard();
-    describe('when playing the square', () => {
+    describe('when playing the tile', () => {
       board = gomokuHandler.play(board, row, col, player);
-      it('square should be occupied', () => {
+      it('tile should be occupied', () => {
         expect(
-          board.squares[row][col]
+          board.tiles[row][col]
         ).toBe(player);
       });
     });
   });
   
   /**
-   * Test if playing first and last square works.
+   * Test if playing first and last tile works.
    * This test is important as it will test the boundaries
-   * does first square start with 0 or 1?
+   * does first tile start with 0 or 1?
    */
   describe.skip('given a board, and player', () => {
     const player = 1;
     let board = gomokuHandler.createBoard();
     describe('when playing outside board', () => {
-      it('last square should not throw exception', () => {
+      it('last tile should not throw exception', () => {
         expect(() => {
           gomokuHandler.play(board, board.cols, board.rows, player);
-        }).not.toThrow("Square don't exist!")
+        }).not.toThrow("Tile don't exist!")
       });
-      it('first square should not throw exception', () => {
+      it('first tile should not throw exception', () => {
         expect(() => {
           gomokuHandler.play(board, 1, 1, player);
-        }).not.toThrow(ERR_MSGS.ERR_SQUARE_OUT_OF_BOUNDS)
+        }).not.toThrow(ERR_MSGS.ERR_TILE_OUT_OF_BOUNDS)
       });
     })
   });
@@ -94,7 +94,7 @@ describe.skip('given a gomokuHandler', () => {
         it('should throw exception', () => {
           expect(() => {
             gomokuHandler.play(board, 0, 1, player);
-          }).toThrow(ERR_MSGS.ERR_SQUARE_OUT_OF_BOUNDS)
+          }).toThrow(ERR_MSGS.ERR_TILE_OUT_OF_BOUNDS)
         });
       });
 
@@ -102,7 +102,7 @@ describe.skip('given a gomokuHandler', () => {
         it('should throw exception', () => {
           expect(() => {
             gomokuHandler.play(board, board.cols + 1, 1, player);
-          }).toThrow(ERR_MSGS.ERR_SQUARE_OUT_OF_BOUNDS)
+          }).toThrow(ERR_MSGS.ERR_TILE_OUT_OF_BOUNDS)
         });
       });
 
@@ -110,7 +110,7 @@ describe.skip('given a gomokuHandler', () => {
         it('should throw exception', () => {
           expect(() => {
             gomokuHandler.play(board, board.cols + 1, 1, player);
-          }).toThrow(ERR_MSGS.ERR_SQUARE_OUT_OF_BOUNDS)
+          }).toThrow(ERR_MSGS.ERR_TILE_OUT_OF_BOUNDS)
         });
       });
 
@@ -118,7 +118,7 @@ describe.skip('given a gomokuHandler', () => {
         it('should throw exception', () => {
           expect(() => {
             gomokuHandler.play(board, board.cols + 1, 1, player);
-          }).toThrow(ERR_MSGS.ERR_SQUARE_OUT_OF_BOUNDS)
+          }).toThrow(ERR_MSGS.ERR_TILE_OUT_OF_BOUNDS)
         });
       });
 
@@ -126,17 +126,21 @@ describe.skip('given a gomokuHandler', () => {
   });
 
   /**
-   * Test if playing on same square throws Exception
+   * Test if playing on same tile throws Exception
    */
-  describe.skip('given a board, and square', () => {
+  describe.skip('given a board, and tile', () => {
     const player = 1;
-    const square = {col: 1, row: 1}; 
+    const tile = {col: 1, row: 1};
     let board = gomokuHandler.createBoard();
-    describe('when playing on non empty square', () => {
-      board = gomokuHandler.play(board, square.col, square.row, player);
+    describe('when playing on non empty tile', () => {
+      board = gomokuHandler.play(board, tile.col, tile.row, player);
       it('game should throw exception', () => {
         expect(() => {
+<<<<<<< HEAD
           gomokuHandler.play(board, square.col, square.row, player);
+=======
+          gomokuHandler.play(board, tile.col, tile.row, player);
+>>>>>>> f77ba5b (Changed path to /api/gomoku)
         }).toThrow(ERR_MSGS.ERR_TILE_OCCUPIED)
       });
     });

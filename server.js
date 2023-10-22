@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const { ENV, environments } = require('./config');
+=======
+const { ENV, environments} = require('./config');
+>>>>>>> f77ba5b (Changed path to /api/gomoku)
 const express = require('express');
 const cors = require('cors')
 var favicon = require('serve-favicon');
@@ -38,6 +42,10 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use('/api/gomoku', require('./routes/game_routes.js'));
 
+<<<<<<< HEAD
+=======
+// Catch-all middleware when not in PROD
+>>>>>>> f77ba5b (Changed path to /api/gomoku)
 if (ENV !== environments.PROD) {
     app.use('*', (req, res) => {
         res.redirect('/api-docs');

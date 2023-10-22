@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const gameController = require('../controllers/game_controller.js')
+const userController = require('../controllers/player_controller.js')
 
 /**
  * @swagger
@@ -114,27 +115,73 @@ router.get('/player/join/:game/:player', gameController.joinGame);
 
 /**
  * @swagger
- * /api/game/player/play/{gameId}/{playerId}/{row}/{col}:
- *   get:
- *     description: Use login api
- *
+ * /player/play/{game}/{player}/{col}/{row}:
+ *   get:  # Consider changing this to PUT or POST for semantic clarity.
+ *     tags:
+ *       - Players
+ *     description: Allows a player to lay a piece on a specific tile identified by its column and row
+ *     parameters:
+ *       - in: path
+ *         name: game
+ *         description: ID of the game
+ *         required: true
+ *         type: string
+ *         format: uuid
+ *       - in: path
+ *         name: player
+ *         description: User ID of the player making the move
+ *         required: true
+ *         type: string
+ *         format: uuid
+ *       - in: path
+ *         name: col
+ *         description: Column number of the tile
+ *         required: true
+ *         type: integer
+ *       - in: path
+ *         name: row
+ *         description: Row number of the tile
+ *         required: true
+ *         type: integer
  *     responses:
- *       '200':
- *         description: A successful response
+ *       200:
+ *         description: Successfully laid the piece
+ *         schema:
+ *           $ref: '#/definitions/Game'
+ *       400:
+ *         description: Bad request (e.g., invalid game, player, column or row data)
+ *       409:
+ *         description: Conflict - various reasons, such as tile not free, not the player's turn, game still waiting for another player, or a player cancelled
+ *       500:
+ *         description: Server error
  */
 router.get('/player/play/:game/:player/:col/:row', gameController.play);
 
 /**
  * @swagger
- * /api/game/player/create:
- *   get:
- *     description: Use login api
- *
+ * /player/create/:
+ *   get:  # It's more appropriate to use POST here since it's a creation operation.
+ *     tags:
+ *       - Players
+ *     description: Creates a new player and returns an ID along with a random user ID
  *     responses:
- *       '200':
- *         description: A successful response
+ *       201:
+ *         description: Player successfully created
+ *         schema:
+ *           type: object
+ *           properties:
+ *             id:
+ *               type: string
+ *               format: uuid
+ *               description: The ID of the newly created player
+ *             userId:
+ *               type: string
+ *               format: uuid
+ *               description: Randomly generated user ID for the player
+ *       500:
+ *         description: Server error
  */
-router.get('/player/create/', gameController.createPlayer);
+router.get('/player/create/', userController.createPlayer);
 
 module.exports = router
 

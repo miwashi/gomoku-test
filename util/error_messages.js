@@ -1,5 +1,5 @@
-const ERR_TILE_OUT_OF_BOUNDS="Square don't exist!";
-const ERR_TILE_OCCUPIED="Square occupied!";
+const ERR_TILE_OUT_OF_BOUNDS="Tile don't exist!";
+const ERR_TILE_OCCUPIED="Tile occupied!";
 const ERR_PLAYER_OUT_OF_TURN="Player out of turn!";
 const ERR_GAME_FULL="Game is full!";
 const ERR_GAME_NOT_FOUND="Game not found!";

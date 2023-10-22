@@ -36,8 +36,3 @@ exports.play = (req, res) => {
     const game = gameHandler.play(id, player, col, row);
     res.status(200).json(game);
 }
-
-exports.createPlayer = (req, res) => {
-    const user =  playerHandler.create();
-    res.status(200).json(user);
-}
