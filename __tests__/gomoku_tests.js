@@ -136,11 +136,7 @@ describe.skip('given a gomokuHandler', () => {
       board = gomokuHandler.play(board, tile.col, tile.row, player);
       it('game should throw exception', () => {
         expect(() => {
-<<<<<<< HEAD
-          gomokuHandler.play(board, square.col, square.row, player);
-=======
           gomokuHandler.play(board, tile.col, tile.row, player);
->>>>>>> f77ba5b (Changed path to /api/gomoku)
         }).toThrow(ERR_MSGS.ERR_TILE_OCCUPIED)
       });
     });

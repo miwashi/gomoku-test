@@ -10,7 +10,7 @@ const randomSquare = (board) => {
 }
 
 /**
- * Utility method to create a random diagonal sequence of five squares depending on board.
+ * Utility method to create a random diagonal sequence of five tiles depending on board.
  * @param board
  * @returns {[{col: number, row: number},{col: number, row: number},{col: number, row: number},{col: number, row: number},{col: number, row: number}]}
  */
@@ -27,7 +27,7 @@ const randomDiagonal = (board) => {
 }
 
 /**
- * Utility method to create a random horisontal sequence of five squares depending on board.
+ * Utility method to create a random horisontal sequence of five tiles depending on board.
  * @param board
  * @returns {[{col: number, row},{col: number, row: number},{col: number, row: number},{col: number, row: number},{col: number, row: number}]}
  */
@@ -44,7 +44,7 @@ const randomHorisontal = (board) => {
 }
 
 /**
- * Utility method to create a random vertical sequence of five squares depending on board.
+ * Utility method to create a random vertical sequence of five tiles depending on board.
  * @param board
  * @returns {[{col: number, row: number},{col: number, row: number},{col: number, row: number},{col: number, row: number},{col: number, row: number}]}
  */
@@ -65,9 +65,9 @@ const randomVertical = (board) => {
  */
 const fillBoard = (board) => {
     let player = 0;
-    for(let col = 0; col < board.squares.length; col++){
-        for(let row = 0; row < board.squares.length; row++){
-            board.squares[col][row] = ++player;
+    for(let col = 0; col < board.tiles.length; col++){
+        for(let row = 0; row < board.tiles.length; row++){
+            board.tiles[col][row] = ++player;
         }
     }
     return board;
