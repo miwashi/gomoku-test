@@ -2,9 +2,9 @@
   "name": "edu-http-classic-gomoku",
   "version": "1.0.0",
   "description": "",
-  "main": "service.js",
+  "main": "./src/service.js",
   "scripts": {
-    "start": "node service.js",
+    "start": "node ./src/service.js",
     "test": "jest  --runInBand --group=-component --group=-integration",
     "test:watch": "jest --runInBand --watchAll=true --group=-component --group=-integration",
     "dev": "nodemon service.js",

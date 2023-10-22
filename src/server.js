@@ -6,15 +6,13 @@ var path = require('path');
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
-
 const app = express();
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '..', 'public', 'favicon.ico')));
 app.use(cors());
 app.use(express.static('public'));
 
 const swaggerOptions = {
     swaggerDefinition: {
-        openapi: "3.0.0",  // Indicating this is an OpenAPI 3 specification
         info: {
             version: "1.0.0",
             title: "Gomoku API",
@@ -22,14 +20,11 @@ const swaggerOptions = {
             contact: {
                 name: "Wacoco"
             },
+            servers: ["http://localhost:3001"],
         },
-        servers: [
-            {
-                url: "http://localhost:3001/api/gomoku"
-            }
-        ]
+        basePath: '/api/gomoku',  // This is the basePath
     },
-    apis: ['./routes/*.js']
+    apis: ['./src/routes/*.js']
 };
 
 
