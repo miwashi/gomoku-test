@@ -56,11 +56,11 @@ router.get('/games', gameController.getGames);
  *       500:
  *         description: Internal server error
  */
-router.get('/games/:id', gameController.findGameById);
+router.get('/game/:id', gameController.findGameById);
 
 /**
  * @swagger
- * /games/add:
+ * /game/add:
  *   get:
  *     tags:
  *       - Games

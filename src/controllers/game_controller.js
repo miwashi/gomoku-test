@@ -3,7 +3,12 @@ const playerHandler = require('../domain/player.js');
 const { logger } = require('../config');
 
 exports.getGames = (req, res) => {
-    res.status(200).json(gameHandler.getGames());
+    //Only id
+    const games = gameHandler.getGames();
+    res.status(200).json(games.map(g => g.id ?? g._id));
+
+    //Full games
+    //res.status(200).json(gameHandler.getGames());
 }
 
 exports.findGameById = (req, res) => {
@@ -11,7 +16,7 @@ exports.findGameById = (req, res) => {
 }
 
 exports.createGame = (req, res) => {
-    res.json(gameHandler.findGameById(req.params.id));
+    //res.json(gameHandler.findGameById(req.params.id));
     const game = gameHandler.createGame();
     res.status(200).json(JSON.stringify(game));
 }
