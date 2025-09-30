@@ -18,10 +18,11 @@ exports.findGameById = (req, res) => {
 exports.createGame = (req, res) => {
     //res.json(gameHandler.findGameById(req.params.id));
     const game = gameHandler.createGame();
-    res.status(200).json(JSON.stringify(game));
+    res.status(200).json(game);
 }
 
 exports.joinGame = (req, res) => {
+    const games = gameHandler.getGames()
     const game = games.find( game => game.id == req.params.game );
     if(game.player1 == "missing"){
         game.player1 = req.params.player;

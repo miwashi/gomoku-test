@@ -25,6 +25,25 @@ router.get('/games', gameController.getGames);
 
 /**
  * @swagger
+ * /games/add:
+ *   get:
+ *     tags:
+ *       - Games
+ *     description: Adds a new game with a name
+ *     responses:
+ *       200:
+ *         description: Game successfully added
+ *         schema:
+ *           $ref: '#/definitions/Game'
+ *       400:
+ *         description: Bad request (e.g., missing name data)
+ *       500:
+ *         description: Server error
+ */
+router.get('/games/add', gameController.createGame);
+
+/**
+ * @swagger
  * /games/{id}:
  *   get:
  *     tags:
@@ -56,26 +75,7 @@ router.get('/games', gameController.getGames);
  *       500:
  *         description: Internal server error
  */
-router.get('/game/:id', gameController.findGameById);
-
-/**
- * @swagger
- * /game/add:
- *   get:
- *     tags:
- *       - Games
- *     description: Adds a new game with a name
- *     responses:
- *       200:
- *         description: Game successfully added
- *         schema:
- *           $ref: '#/definitions/Game'
- *       400:
- *         description: Bad request (e.g., missing name data)
- *       500:
- *         description: Server error
- */
-router.get('/games/add', gameController.createGame);
+router.get('/games/:id', gameController.findGameById);
 
 /**
  * @swagger
