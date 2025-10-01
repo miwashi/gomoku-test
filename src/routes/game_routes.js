@@ -18,12 +18,14 @@ const userController = require('../controllers/player_controller.js');
  *     summary: List games
  *     responses:
  *       200:
- *         description: Array of uuid
+ *         description: Array of UUIDs
  *         content:
  *           application/json:
  *             schema:
  *               type: array
- *               items: { $ref: '#/components/schemas/Game' }
+ *               items:
+ *                 type: string
+ *                 format: uuid
  */
 router.get('/games', gameController.getGames);
 
