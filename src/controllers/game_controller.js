@@ -21,7 +21,7 @@ exports.createGame = (req, res) => {
 
 exports.joinGame = (req, res) => {
     const { game: gameId, player } = req.params;
-    const g = gameHandler.joinGame?.(gameId, player); // assuming you implement this
+    const g = gameHandler.joinGame?.(gameId, player);
     if (!g) return res.status(404).json({ error: 'Not found' });
     logger.info(g);
     res.status(200).json(g);

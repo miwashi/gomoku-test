@@ -88,6 +88,28 @@ const findGameById = (id) => {
     return game;
 }
 
+const joinGame = (gameId, playerId) => {
+
+    if (!gameId) throw ERR_MSGS.ERR_GAME_NOT_FOUND;
+    if (!playerId) throw ERR_MSGS.ERR_INVALID_PLAYER_ID;
+
+    const game = findGameById(gameId);
+    const player = playerHandler.findById(playerId); // throws if invalid/not found
+    // already in game → no-op
+    if (game.player1?.id === player.id || game.player2?.id === player.id) return game;
+
+    if (game.player1 == null) {
+        game.player1 = player;
+    } else if (game.player2 == null) {
+        game.player2 = player;
+    } else {
+        throw ERR_MSGS.ERR_GAME_FULL;
+    }
+
+    return game;
+};
+
+
 module.exports = {
     play,
     createGame,
@@ -95,5 +117,6 @@ module.exports = {
     getGames,
     findGameById,
     findGamesByName,
-    addPlayer
+    addPlayer,
+    joinGame
 }

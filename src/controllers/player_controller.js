@@ -9,13 +9,13 @@ exports.createPlayer = (req, res) => {
 
 exports.listPlayers = (req, res) => {
     const players = playerHandler.getAll();
-    res.status(200).json(players); // OK (empty array if none)
+    res.status(200).json(players);
 };
 
 exports.findPlayerById = (req, res) => {
     try {
         const player = playerHandler.findById(req.params.id);
-        res.status(200).json(player); // OK
+        res.status(200).json(player);
     } catch (err) {
         if (err === ERR_MSGS.ERR_INVALID_PLAYER_ID) {
             return res.status(400).json({ error: 'Invalid player id' }); // Bad Request
