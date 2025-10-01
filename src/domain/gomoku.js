@@ -13,7 +13,7 @@ const ROWS = process.env.ROWS || DEFAULT_ROWS;
 
 const isTie = (board) => {
     for (let col = 1; col <= (board.cols); col++){
-        for (let row = 1; row <= (board.cols); row++){
+        for (let row = 1; row <= (board.rows); row++){
             if(board.tiles[col][row] == 0) return false;
         }
     }
@@ -22,7 +22,7 @@ const isTie = (board) => {
 
 const isWin = (board) => {
     for (let col = 1; col <= (board.cols); col++){
-        for (let row = 1; row <= (board.cols); row++){
+        for (let row = 1; row <= (board.rows); row++){
             const tile = {col: col, row: row};
             if(testRow(diagonal(tile), board)) return true;
             if(testRow(horizontal(tile), board)) return true;
