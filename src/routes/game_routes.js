@@ -68,6 +68,24 @@ router.get('/games/:id', gameController.findGameById);
 
 /**
  * @openapi
+ * /api/gomoku/players:
+ *   get:
+ *     tags: [Players]
+ *     summary: List players
+ *     responses:
+ *       200:
+ *         description: Array of players
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User'
+ */
+router.get('/players', userController.listPlayers);
+
+/**
+ * @openapi
  * /api/gomoku/player/join/{game}/{player}:
  *   get:
  *     tags: [Players]
@@ -190,3 +208,28 @@ module.exports = router;
  *         board:
  *           $ref: '#/components/schemas/Board'
  */
+
+// find-by-id
+/**
+ * @openapi
+ * /api/gomoku/player/{id}:
+ *   get:
+ *     tags: [Players]
+ *     summary: Get player by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string, format: uuid }
+ *     responses:
+ *       200:
+ *         description: Player found
+ *         content:
+ *           application/json:
+ *             schema: { $ref: '#/components/schemas/User' }
+ *       400:
+ *         description: Invalid player id
+ *       404:
+ *         description: Player not found
+ */
+router.get('/player/:id', userController.findPlayerById);

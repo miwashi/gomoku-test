@@ -27,4 +27,8 @@ const findById = (id) => {
     return player;
 }
 
-module.exports = {create, update, remove, findById}
+const getAll = () => {
+    return players;
+}
+
+module.exports = {create, update, remove, findById, getAll}

@@ -78,6 +78,7 @@ const findGamesByName = (name) => {
 }
 
 const findGameById = (id) => {
+    console.log(games);
     if(!id) throw ERR_MSGS.ERR_GAME_NOT_FOUND;
     const game = games.find( game => game.id === id );
     if(!game) {
